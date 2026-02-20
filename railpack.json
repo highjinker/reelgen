@@ -7,13 +7,22 @@
   "buildAptPackages": ["ffmpeg"],
   "steps": {
     "install": {
+      "inputs": [
+        {
+          "local": true,
+          "include": ["."]
+        }
+      ],
       "commands": [
         "pip install -r backend/requirements.txt",
         "npm install --prefix frontend"
       ]
     },
     "build": {
-      "inputs": [{ "step": "install" }],
+      "inputs": [
+        { "step": "install" },
+        { "local": true, "include": ["."] }
+      ],
       "commands": ["npm run build --prefix frontend"]
     }
   },
