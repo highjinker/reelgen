@@ -5,7 +5,7 @@ import { reelsApi } from '../api/reels';
 export function usePolling(reelId: number | null, intervalMs: number = 3000) {
   const [reel, setReel] = useState<Reel | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval>>();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
   const activeRef = useRef(true);
 
   const isTerminal = (status: string) =>

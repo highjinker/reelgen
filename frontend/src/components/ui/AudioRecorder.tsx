@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Mic, Square, Play } from 'lucide-react';
+import { Mic, Square } from 'lucide-react';
 import { Button } from './Button';
 
 interface AudioRecorderProps {
@@ -13,7 +13,7 @@ export function AudioRecorder({ onRecorded, existingUrl }: AudioRecorderProps) {
   const [duration, setDuration] = useState(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   const startRecording = async () => {
     try {

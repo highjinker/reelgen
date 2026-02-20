@@ -29,8 +29,6 @@ export function ReelTimeline({ currentStatus }: ReelTimelineProps) {
         const stepIdx = STATUS_ORDER.indexOf(step.key);
         const isCompleted = !isFailed && (currentIdx > stepIdx || (currentStatus === 'completed' && step.key === 'completed'));
         const isCurrent = !isFailed && currentStatus === step.key;
-        const isPending = !isFailed && currentIdx < stepIdx;
-
         return (
           <div key={step.key} className="flex items-center gap-3">
             <div
