@@ -9,7 +9,13 @@ connect_args = {}
 if settings.DATABASE_URL.startswith("sqlite"):
     connect_args["check_same_thread"] = False
 
-engine = create_engine(settings.DATABASE_URL, connect_args=connect_args)
+db_url = settings.DATABASE_URL
+# Railway public PostgreSQL requires SSL
+if db_url.startswith("postgresql") and "sslmode" not in db_url:
+    separator = "&" if "?" in db_url else "?"
+    db_url = f"{db_url}{separator}sslmode=require"
+
+engine = create_engine(db_url, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
